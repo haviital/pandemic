@@ -6,8 +6,8 @@ from PIL import ImageFont
 
 #CENTRAL_MERIDIAN_OFFSET = -79.0;
 #CENTRAL_LATITUDE_OFFSET = -294.0;
-X_OFFSET = -18.0;
-Y_OFFSET = -8.0;
+X_OFFSET = -16.0;
+Y_OFFSET = -17.0;
 W = 638;
 H = 480;
 PI = math.pi
@@ -23,7 +23,14 @@ def createCityList():
         ["Paris",       0, 0,                   240+79.0, 110+0.0],
         ["Tampere2",    61.49911, 23.787128],
         ["Tampere",     0,0,                    282+79.0, 75+0.0],
-        ["Lahti",      51.509865, -0.118092,    283+79.0, 76+0.0]
+        ["Lahti",       51.509865, -0.118092,    283+79.0, 76+0.0],
+        ["Rome",        41.902782, 12.496366],
+        ["Helsinki",    60.192059, 24.945831],
+        ["Cape Town",   -33.918861, 18.423300],
+        ["Los Angeles", 34.052235, -118.243683],
+        ["Buenos Aires",-34.603722, -58.381592],
+        ["Melbourne",   -37.840935, 144.946457],
+        ["Athens",      37.983810, 23.727539]
     ]
  
     return cityList
@@ -65,22 +72,18 @@ def millerProject(lat, lon):
     lat =  lat * PI / 180;
     
     x = lon;
-    y = 1.25 * math.log( math.tan( 0.25 * PI + 0.4 * lat ) );
+    y = 1.25 * math.log( math.tan( (0.25 * PI) + (0.4 * lat )) );
+    scale = W/PI/2
+    x *= scale;
+    y *= scale;
+    x += W/2;
+    y += W/2*0.7331989845
     
-    x = ( W / 2 ) + ( W / (2 * PI) ) * x;
-    #Northern hemisphere behaves differently from southern hemisphere
-    #most likely from floating point precision errors
-    #this helps compensate for the difference
-    if lon > 0.0:
-        y = H - (( H / 2 ) - ( H / ( 2 * 2.303412543 ) ) * y)
-    else:
-        y = H - (( H / 2 ) - ( H / ( 2 * 2.11896 ) ) * y)
-        
+    y = H-y
+    
     x += X_OFFSET
-        
-    y = H - y    
     y += Y_OFFSET
-    
+         
     return x,y
     
 
