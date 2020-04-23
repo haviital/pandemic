@@ -4,10 +4,8 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 
-#CENTRAL_MERIDIAN_OFFSET = -79.0;
-#CENTRAL_LATITUDE_OFFSET = -294.0;
 X_OFFSET = -16.0;
-Y_OFFSET = -17.0;
+Y_OFFSET = -8.0;
 W = 638;
 H = 480;
 PI = math.pi
@@ -19,11 +17,8 @@ def createCityList():
     cityList = [
         ["London",      51.509865, -0.118092],
         ["Zero",        0.0, 0.0],
-        ["Paris2",      48.85341, 2.3488],
-        ["Paris",       0, 0,                   240+79.0, 110+0.0],
-        ["Tampere2",    61.49911, 23.787128],
-        ["Tampere",     0,0,                    282+79.0, 75+0.0],
-        ["Lahti",       51.509865, -0.118092,    283+79.0, 76+0.0],
+        ["Paris",      48.85341, 2.3488],
+        ["Tampere",    61.49911, 23.787128],
         ["Rome",        41.902782, 12.496366],
         ["Helsinki",    60.192059, 24.945831],
         ["Cape Town",   -33.918861, 18.423300],
@@ -72,7 +67,8 @@ def millerProject(lat, lon):
     lat =  lat * PI / 180;
     
     x = lon;
-    y = 1.25 * math.log( math.tan( (0.25 * PI) + (0.4 * lat )) );
+    #y = 1.25 * math.log( math.tan( (0.25 * PI) + (0.4 * lat )) );
+    y = 1.35 * math.log( math.tan( (0.25 * PI) + (0.4 * lat )) );
     scale = W/PI/2
     x *= scale;
     y *= scale;
@@ -89,36 +85,36 @@ def millerProject(lat, lon):
 
 ### MAIN
 
-print("# citydata.py")
-print("")
-print("cities = (")
+# print("# citydata.py")
+# print("")
+# print("cities = (")
 
-# city coords
+# # city coords
 
-#London
-x,y = millerProject(51.509865, -0.118092)
-print('    ("London",', int(round(x)),', ',int(round(y)),'),')
+# #London
+# x,y = millerProject(51.509865, -0.118092)
+# print('    ("London",', int(round(x)),', ',int(round(y)),'),')
 
-#zero
-x,y = millerProject(0.0, 0.0)
-print('    ("Zero",', int(round(x)),', ',int(round(y)),'),')
+# #zero
+# x,y = millerProject(0.0, 0.0)
+# print('    ("Zero",', int(round(x)),', ',int(round(y)),'),')
 
-#paris2
-x,y = millerProject(48.85341, 2.3488)
-print('    ("Paris2",', int(round(x)),', ',int(round(y)),'),')
+# #paris2
+# x,y = millerProject(48.85341, 2.3488)
+# print('    ("Paris2",', int(round(x)),', ',int(round(y)),'),')
 
-#Tampere2
-x,y = millerProject(61.49911, 23.787128)
-print('    ("Tampere2",', int(round(x)),', ',int(round(y)),'),')
+# #Tampere2
+# x,y = millerProject(61.49911, 23.787128)
+# print('    ("Tampere2",', int(round(x)),', ',int(round(y)),'),')
 
-print('    ("Tampere", 282, 75),')
-print('    ("Lahti", 283,76),')
-print('    ("Paris", 240, 110)')
+# print('    ("Tampere", 282, 75),')
+# print('    ("Lahti", 283,76),')
+# print('    ("Paris", 240, 110)')
 
-print(")")
+# print(")")
 
-#x,y = millerProject(100, 100) 
-#print("x=",x,"y=",y)   
+# #x,y = millerProject(100, 100) 
+# #print("x=",x,"y=",y)   
 
 cityList = createCityList()
 
