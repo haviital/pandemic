@@ -30,6 +30,79 @@ def createCityList():
  
     return cityList
 
+# Format:
+# Aberdeen, Scotland	57	9 N	2	9 W	5:00 p.m.
+def createCityList2():
+    
+    cityList = []
+    
+    f = open("biggest_cities.txt", "r")
+    lines = f.readlines();
+    for line in lines:
+        words = line.split('\t')
+        print("words",words)
+        city = words[0]
+        
+        # Longitude
+        longitudeInt = words[1]
+        longitudeDec = words[2].split(' ')[0]
+        longitudeSign = "N"
+        if len(words[2].split(' '))==2:
+            longitudeSign = words[2].split(' ')[1]
+        longitude = float(longitudeInt+'.'+longitudeDec)
+        if longitudeSign=="S":
+            longitude = -longitude
+        
+        # Latitude
+        latitudeInt = words[3]
+        latitudeDec = words[4].split(' ')[0]
+        latitudeSign = "W"
+        if len(words[4].split(' '))==2:
+            latitudeSign = words[4].split(' ')[1]
+        latitude = float(latitudeInt+'.'+latitudeDec)
+        if latitudeSign=="W":
+            latitude = -latitude
+            
+        #print(country," ", longitude,",", latitude)
+        
+        cityList.append( [city.split(',')[0], longitude, latitude])
+ 
+    return cityList
+
+# Format:
+# Brazil	Brasilia	15.47S	47.55W
+def createCityList3():
+    
+    cityList = []
+    
+    f = open("capital_cities.txt", "r")
+    lines = f.readlines();
+    for line in lines:
+        words = line.split('\t')
+        print("words",words)
+        city = words[1]
+        
+        # Longitude
+        longitude = float(words[2][:-1])
+        print("longitude",longitude)
+        longitudeSign = words[2][-1:]
+        if longitudeSign=="S":
+            longitude = -longitude
+        
+        # Latitude
+        latitude = float(words[3][:-2])
+        latitudeSign = words[3][-2:-1]
+        print("latitudeSign",latitudeSign)
+        if latitudeSign=="W":
+            latitude = -latitude
+            
+        #print(country," ", longitude,",", latitude)
+        
+        cityList.append( [city, longitude, latitude])
+ 
+    return cityList
+
+
 def drawToPicture(cityList):
 
     # Load map
@@ -116,8 +189,11 @@ def millerProject(lat, lon):
 # #x,y = millerProject(100, 100) 
 # #print("x=",x,"y=",y)   
 
-cityList = createCityList()
+cityList = createCityList3()
 
 drawToPicture(cityList)
+
+print("cityList",cityList)
+
 
 

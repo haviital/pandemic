@@ -1,0 +1,13 @@
+Australia	Canberra	35.15S	149.08E
+Afghanistan	Kabul	34.28N	69.11E
+Argentina	Buenos Aires	36.30S	60.00W
+Bahamas	Nassau	25.05N	77.20W
+Canada	Ottawa	45.27N	75.42W
+Egypt	Cairo	30.01N	31.14E
+Finland	Helsinki	60.15N	25.03E
+France	Paris	48.50N	02.20E
+Greece	Athens	37.58N	23.46E
+Greenland	Nuuk	64.10N	51.35W
+United Kingdom of Great Britain and Northern Ireland	London	51.36N	00.05W
+Italy	Rome	41.54N	12.29E
+India	New Delhi	28.37N	77.13E
