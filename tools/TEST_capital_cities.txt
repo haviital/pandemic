@@ -11,3 +11,4 @@ Greenland	Nuuk	64.10N	51.35W
 United Kingdom of Great Britain and Northern Ireland	London	51.36N	00.05W
 Italy	Rome	41.54N	12.29E
 India	New Delhi	28.37N	77.13E
+Zero	Null Island	0.0N	0.0E

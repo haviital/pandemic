@@ -18,14 +18,14 @@ Barbados	Bridgetown	13.05N	59.30W
 Belarus	Minsk	53.52N	27.30E
 Belgium	Brussels	50.51N	04.21E
 Belize	Belmopan	17.18N	88.30W
-Benin	Porto Novo (constitutional) / Cotonou (seat of government)	06.23N	02.42E
+Benin	Porto Novo	06.23N	02.42E
 Bhutan	Thimphu	27.31N	89.45E
-Bolivia	La Paz (administrative) / Sucre (legislative)	16.20S	68.10W
+Bolivia	La Paz	16.20S	68.10W
 Bosnia and Herzegovina	Sarajevo	43.52N	18.26E
 Botswana	Gaborone	24.45S	25.57E
 Brazil	Brasilia	15.47S	47.55W
 British Virgin Islands	Road Town	18.27N	64.37W
-Brunei Darussalam	Bandar Seri Begawan	04.52N	115.00E
+Brunei Darussalam	Bandar Seri Beg.	04.52N	115.00E
 Bulgaria	Sofia	42.45N	23.20E
 Burkina Faso	Ouagadougou	12.15N	01.30W
 Burundi	Bujumbura	03.16S	29.18E
@@ -126,7 +126,7 @@ Mozambique	Maputo	25.58S	32.32E
 Myanmar	Yangon	16.45N	96.20E
 Namibia	Windhoek	22.35S	17.04E
 Nepal	Kathmandu	27.45N	85.20E
-Netherlands	Amsterdam / The Hague (seat of Government)	52.23N	04.54E
+Netherlands	Amsterdam	52.23N	04.54E
 Netherlands Antilles	Willemstad	12.05N	69.00W
 New Caledonia	Noumea	22.17S	166.30E
 New Zealand	Wellington	41.19S	174.46E
@@ -167,11 +167,11 @@ Slovakia	Bratislava	48.10N	17.07E
 Slovenia	Ljubljana	46.04N	14.33E
 Solomon Islands	Honiara	09.27S	159.57E
 Somalia	Mogadishu	02.02N	45.25E
-South Africa	Pretoria (administrative) / Cape Town (legislative) / Bloemfontein (judicial)	25.44S	28.12E
+South Africa	Cape Town	25.44S	28.12E
 Spain	Madrid	40.25N	03.45W
 Sudan	Khartoum	15.31N	32.35E
 Suriname	Paramaribo	05.50N	55.10W
-Swaziland	Mbabane (administrative)	26.18S	31.06E
+Swaziland	Mbabane	26.18S	31.06E
 Sweden	Stockholm	59.20N	18.03E
 Switzerland	Bern	46.57N	07.28E
 Syrian Arab Republic	Damascus	33.30N	36.18E

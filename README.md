@@ -16,4 +16,7 @@ https://github.com/bjorn/tiled/wiki/Import-from-Image
 World Map:
 https://fi.m.wikipedia.org/wiki/Tiedosto:World_map_(Miller_cylindrical_projection,_blank).svg
 
+Coordinates of the capital cities of the world.
+https://lab.lmnixon.org/4th/worldcapitals.html
+
 

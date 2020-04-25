@@ -3,13 +3,18 @@ import math
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
+import binascii
 
-X_OFFSET = -16.0;
-Y_OFFSET = -8.0;
+X_OFFSET = -81.0;
+Y_OFFSET = 107.0;
 W = 638;
-H = 480;
+#H = 333;
 PI = math.pi
-worldMapName = "worldmap"
+worldMapName = "WorldMap512"
+
+IMAGE_W = 512;
+IMAGE_H = 333;
+
 
 
 def createCityList():
@@ -75,16 +80,17 @@ def createCityList3():
     
     cityList = []
     
+    #f = open("TEST_capital_cities.txt", "r")
     f = open("capital_cities.txt", "r")
     lines = f.readlines();
     for line in lines:
         words = line.split('\t')
-        print("words",words)
+        #print("words",words)
         city = words[1]
         
         # Longitude
         longitude = float(words[2][:-1])
-        print("longitude",longitude)
+        #print("longitude",longitude)
         longitudeSign = words[2][-1:]
         if longitudeSign=="S":
             longitude = -longitude
@@ -92,7 +98,7 @@ def createCityList3():
         # Latitude
         latitude = float(words[3][:-2])
         latitudeSign = words[3][-2:-1]
-        print("latitudeSign",latitudeSign)
+        #print("latitudeSign",latitudeSign)
         if latitudeSign=="W":
             latitude = -latitude
             
@@ -103,35 +109,43 @@ def createCityList3():
     return cityList
 
 
-def drawToPicture(cityList):
+def projectAndDrawToPicture(cityList):
 
     # Load map
-    img = Image.open(worldMapName+".bmp")
+    img = Image.open(worldMapName+".png")
     img = img.convert("RGB")
     mapImage = img.load()
 
     # Draw points
+    newCityList = []
     for city in cityList:
         color = () 
         if len(city) == 3:
             x,y = millerProject(city[1], city[2])
             color = (255,0 ,0);
-        else:
-            x,y = (city[3], city[4])
-            color = (0, 255 ,0);
             
-        mapImage[x,y] = color;
-        mapImage[x+1,y] = color;
-        mapImage[x-1,y] = color;
-        mapImage[x,y+1] = color;
-        mapImage[x,y-1] = color;
-        font = ImageFont.truetype("arial.ttf", 10, encoding="unic")
-        draw = ImageDraw.Draw(img)
-        draw.text((x+3,y-5), city[0], color, font)
+        if x>=0 and x<IMAGE_W and y>=0 and y<IMAGE_H:
+        
+            if len(city[0]) > 16:
+                print("ERROR! TOO LONG CITY NAME", city[0])
+            else:
+                city = [city[0], city[1], city[2], x, y]
+                newCityList.append(city)
+                
+                mapImage[x,y] = color;
+                mapImage[x+1,y] = color;
+                mapImage[x-1,y] = color;
+                mapImage[x,y+1] = color;
+                mapImage[x,y-1] = color;
+                font = ImageFont.truetype("arial.ttf", 10, encoding="unic")
+                draw = ImageDraw.Draw(img)
+                draw.text((x+3,y-5), city[0], color, font)
 
             
     # Save map
     img.save( worldMapName+"_test.png", "PNG" )
+    
+    return newCityList
 
 def millerProject(lat, lon):
 
@@ -141,14 +155,14 @@ def millerProject(lat, lon):
     
     x = lon;
     #y = 1.25 * math.log( math.tan( (0.25 * PI) + (0.4 * lat )) );
-    y = 1.35 * math.log( math.tan( (0.25 * PI) + (0.4 * lat )) );
+    y = 1.30 * math.log( math.tan( (0.25 * PI) + (0.4 * lat )) );
     scale = W/PI/2
     x *= scale;
     y *= scale;
     x += W/2;
     y += W/2*0.7331989845
     
-    y = H-y
+    y = IMAGE_H-y
     
     x += X_OFFSET
     y += Y_OFFSET
@@ -158,42 +172,70 @@ def millerProject(lat, lon):
 
 ### MAIN
 
-# print("# citydata.py")
-# print("")
-# print("cities = (")
-
-# # city coords
-
-# #London
-# x,y = millerProject(51.509865, -0.118092)
-# print('    ("London",', int(round(x)),', ',int(round(y)),'),')
-
-# #zero
-# x,y = millerProject(0.0, 0.0)
-# print('    ("Zero",', int(round(x)),', ',int(round(y)),'),')
-
-# #paris2
-# x,y = millerProject(48.85341, 2.3488)
-# print('    ("Paris2",', int(round(x)),', ',int(round(y)),'),')
-
-# #Tampere2
-# x,y = millerProject(61.49911, 23.787128)
-# print('    ("Tampere2",', int(round(x)),', ',int(round(y)),'),')
-
-# print('    ("Tampere", 282, 75),')
-# print('    ("Lahti", 283,76),')
-# print('    ("Paris", 240, 110)')
-
-# print(")")
-
-# #x,y = millerProject(100, 100) 
-# #print("x=",x,"y=",y)   
 
 cityList = createCityList3()
 
-drawToPicture(cityList)
+newCityList = projectAndDrawToPicture(cityList)
 
-print("cityList",cityList)
+#print("cityList",cityList)
+
+# Print CITYDATA.PY
+
+
+# tile0Pixels = b'\
+# \xcc\
+# \xcc\
+# '
+
+
+print("# citydata.py")
+print("")
+print("FORMAT: <city name lenght><city name><x-coordinate 3 bytes><y-coordinate 3 bytes>")
+print("citydataBytes= b'\\")
+
+for city in newCityList:
+    # Convert name to bytes
+    
+    # record lenght
+    line=""
+    cityNameAsBytes = str.encode(city[0])
+    recordLen = 3+len(cityNameAsBytes)+3+3
+    recordLenInBytes = recordLen.to_bytes(3,'big')
+    for i in range(len(recordLenInBytes)): line += "\\x" + "{:02x}".format(recordLenInBytes[i])
+    #line = "\\"+hex(len(cityNameAsBytes)+3+3)
+    
+    # name
+    for i in range(len(cityNameAsBytes)): line += "\\x" + "{:02x}".format(cityNameAsBytes[i])
+    
+    # x-coord
+    xInBytes = int(round(city[3])).to_bytes(3,'big')
+    for i in range(len(xInBytes)): line += "\\x" + "{:02x}".format(xInBytes[i])
+
+    # y coord
+    yInBytes = int(round(city[4])).to_bytes(3,'big')
+    for i in range(len(yInBytes)): line += "\\x" + "{:02x}".format(yInBytes[i])  
+    
+    print(line+"\\")
+    
+print("'")
+
+    
+
+
+
+
+#print("cities = (")
+#
+## city coords
+#for city in newCityList:
+#    #print("city",city)
+#    print('    ("',city[0], '", ',int(round(city[3])),', ',int(round(city[4])),'),')
+#
+#print(")")
+
+
+
+
 
 
 
