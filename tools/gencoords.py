@@ -188,10 +188,18 @@ newCityList = projectAndDrawToPicture(cityList)
 # '
 
 
-print("# citydata.py")
-print("")
-print("FORMAT: <city name lenght><city name><x-coordinate 3 bytes><y-coordinate 3 bytes>")
-print("citydataBytes= b'\\")
+print( "# citydata.py")
+print( "")
+print( "# The packed city record format:")
+print( "#")
+print(r'# \x0a\x4b\x61\x62\x75\x6c\x01\x68\x00\x8c\ ')
+print( "#")
+print( "#  ^-^-------------------------------------- The city record size in bytes (e.g. 10)") 
+print( '#      ^-----------------^-------------------The city name (e.g. "Kabul")') 
+print( "#                          ^-----^-----------The x coordinate (e.g. 360)") 
+print( "#                                  ^-----^-- The y coordinate (e.g. 140)") 
+print( "")
+print( "citydataBytes= b'\\")
 
 for city in newCityList:
     # Convert name to bytes
@@ -199,20 +207,19 @@ for city in newCityList:
     # record lenght
     line=""
     cityNameAsBytes = str.encode(city[0])
-    recordLen = 3+len(cityNameAsBytes)+3+3
-    recordLenInBytes = recordLen.to_bytes(3,'big')
-    for i in range(len(recordLenInBytes)): line += "\\x" + "{:02x}".format(recordLenInBytes[i])
+    recordLen = 1+len(cityNameAsBytes)+2+2
+    line += "\\x" + "{:02x}".format(recordLen)
     #line = "\\"+hex(len(cityNameAsBytes)+3+3)
     
     # name
     for i in range(len(cityNameAsBytes)): line += "\\x" + "{:02x}".format(cityNameAsBytes[i])
     
     # x-coord
-    xInBytes = int(round(city[3])).to_bytes(3,'big')
+    xInBytes = int(round(city[3])).to_bytes(2,'big')
     for i in range(len(xInBytes)): line += "\\x" + "{:02x}".format(xInBytes[i])
 
     # y coord
-    yInBytes = int(round(city[4])).to_bytes(3,'big')
+    yInBytes = int(round(city[4])).to_bytes(2,'big')
     for i in range(len(yInBytes)): line += "\\x" + "{:02x}".format(yInBytes[i])  
     
     print(line+"\\")

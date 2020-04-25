@@ -144,6 +144,61 @@ heroRightPixels_f2 = b'\
 '
 heroRight_f2 = upygame.surface.Surface(10, 11, heroRightPixels_f2)
 
+dustRightPixels_f1 = b'\
+\x00\x00\x06\x60\
+\x06\x00\x66\x66\
+\x66\x60\x66\x66\
+\x06\x00\x06\x60\
+'
+dustRight_f1 = upygame.surface.Surface(8, 4, dustRightPixels_f1)
+dustRightPixels_f2 = b'\
+\x00\x00\x06\x06\
+\x00\x60\x66\x60\
+\x06\x00\x06\x00\
+\x00\x00\x00\x00\
+'
+dustRight_f2 = upygame.surface.Surface(8, 4, dustRightPixels_f2)
+dustRightPixels_f3 = b'\
+\x00\x00\x00\x00\
+\x00\x60\x06\x00\
+\x00\x00\x00\x00\
+\x00\x00\x00\x00\
+'
+dustRight_f3 = upygame.surface.Surface(8, 4, dustRightPixels_f3)
+dustUpPixels_f1 = b'\
+\x06\x60\
+\x66\x66\
+\x66\x66\
+\x06\x60\
+\x00\x00\
+\x00\x60\
+\x06\x66\
+\x00\x60\
+'
+dustUp_f1 = upygame.surface.Surface(4, 8, dustUpPixels_f1)
+dustUpPixels_f2 = b'\
+\x60\x00\
+\x06\x00\
+\x66\x60\
+\x06\x00\
+\x00\x00\
+\x06\x00\
+\x00\x60\
+\x00\x00\
+'
+dustUp_f2 = upygame.surface.Surface(4, 8, dustUpPixels_f2)
+dustUpPixels_f3 = b'\
+\x00\x00\
+\x00\x00\
+\x06\x00\
+\x00\x00\
+\x00\x00\
+\x06\x00\
+\x00\x00\
+\x00\x00\
+'
+dustUp_f3 = upygame.surface.Surface(4, 8, dustUpPixels_f3)
+
 targetCity6x5Pixels_f1 = b'\
 \x09\x99\x00\
 \x9f\xf9\x90\
@@ -163,13 +218,11 @@ targetCity6x5Pixels_f2 = b'\
 targetCity6x5_f2 = upygame.surface.Surface(6, 5, targetCity6x5Pixels_f2)
 
 
-panelLeftEndPixels6x12 = b'\
+panelLeftEndPixels = b'\
 \x00\x00\x66\
 \x00\x66\x66\
 \x06\x66\x66\
 \x06\x66\x66\
-\x66\x66\x66\
-\x66\x66\x66\
 \x66\x66\x66\
 \x66\x66\x66\
 \x06\x66\x66\
@@ -177,11 +230,9 @@ panelLeftEndPixels6x12 = b'\
 \x00\x66\x66\
 \x00\x00\x66\
 '
-panelLeftEnd6x12 = upygame.surface.Surface(6, 12, panelLeftEndPixels6x12)
+panelLeftEnd = upygame.surface.Surface(6, 10, panelLeftEndPixels)
 
-panelMiddlePixels32x12 = b'\
-\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\
-\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\
+panelMiddlePixels = b'\
 \x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\
 \x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\
 \x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\
@@ -193,7 +244,30 @@ panelMiddlePixels32x12 = b'\
 \x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\
 \x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\x66\
 '
-panelMiddle32x12 = upygame.surface.Surface(32, 12, panelMiddlePixels32x12)
+panelMiddle = upygame.surface.Surface(32, 10, panelMiddlePixels)
+
+infectedPixels_f1 = b'\
+\x00\x88\x00\
+\x00\x88\x00\
+\x00\x00\x00\
+\x08\x88\x80\
+\x80\x88\x08\
+\x00\x88\x00\
+\x08\x00\x80\
+\x08\x00\x80\
+'
+infected_f1 = upygame.surface.Surface(6, 8, infectedPixels_f1)
+infectedPixels_f2 = b'\
+\x00\x22\x00\
+\x00\x22\x00\
+\x00\x00\x00\
+\x02\x22\x20\
+\x20\x22\x02\
+\x00\x22\x00\
+\x02\x00\x20\
+\x02\x00\x20\
+'
+infected_f2 = upygame.surface.Surface(6, 8, infectedPixels_f2)
 
 # 386296__ldezem__pneumatic-drill-atlas-copco-bv7-run-freely-play-8
 motorSfx = b'\

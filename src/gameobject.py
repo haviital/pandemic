@@ -8,7 +8,7 @@
 import upygame as pygame
 #import globals as glob
 import sprite
-import urandom as random
+#import urandom as random
 #import data
 #import utils
 import glob
@@ -19,11 +19,12 @@ class GameObject(sprite.Sprite):
         sprite.Sprite.__init__(self)
         self.frames = surfaces
         self.frameOffsets = frameOffsets
-        self.currentAnimFrameNum = 0;
+        self.currentAnimFrameNum = 0
         self.image = self.frames[self.currentAnimFrameNum]  # current image
-        self.animDur = 3;
-        self.animDurCounter = self.animDur;
-        self.animDir = 1;
+        self.animDur = 3
+        self.animDurCounter = self.animDur
+        self.animDir = 1
+        self.animMode = "";
 
         # velocity and position in the world
         self.vx = 0
@@ -37,17 +38,18 @@ class GameObject(sprite.Sprite):
         # Position in the viewport
         self.rect = self.frames[self.currentAnimFrameNum].get_rect()
 
-        # Direction to go
-        self.dir = 3 # 1=up, 2=right, 3=down, 4=left
-        self.randTurnFrameNum = 40
-        self.randCheckHeroPosFrameNum = 50
-        self.id = 0
-        
-    def UpdateImage(self):
+    def ResetAnimation(self):
+
+         # The animation duration
+        self.animDurCounter = self.animDur
+
+        # Set current image
         self.image = self.frames[self.currentAnimFrameNum]
         self.rect.width = self.image.get_rect().width
         self.rect.height = self.image.get_rect().height
-
+        self.wx += self.frameOffsets[self.currentAnimFrameNum][0]
+        self.wy += self.frameOffsets[self.currentAnimFrameNum][1]
+                
     def update(self):
 
         if(not self.active): return
@@ -69,29 +71,21 @@ class GameObject(sprite.Sprite):
           if self.animDurCounter == 0:
                 self.currentAnimFrameNum += self.animDir
                 if (self.currentAnimFrameNum >= len(self.frames)):
-                    self.currentAnimFrameNum = 0
+                    if self.animMode == "once":
+                        self.currentAnimFrameNum = len(self.frames) - 1
+                    else:  # loop
+                        self.currentAnimFrameNum = 0
 
-                # The animation duration
-                self.animDurCounter = self.animDur
+                self.ResetAnimation()
 
-                # Set current image
-                self.UpdateImage()
-                self.wx += self.frameOffsets[self.currentAnimFrameNum][0]
-                self.wy += self.frameOffsets[self.currentAnimFrameNum][1]
 
 
         #print("juice: wx", self.wx,"wy",self.wy)
         # Advance position in the world
         prevX = self.wx
         prevY = self.wy
-        if(self.dir == 1): # up
-            self.wy -= self.vy
-        elif(self.dir == 2): # right
-            self.wx += self.vx
-        elif(self.dir == 3): # down
-            self.wy += self.vy
-        else: # right
-            self.wx -= self.vx
+        self.wx += self.vx
+        self.wy += self.vy
 
        # Set the position in the viewport
         self.rect.x = self.wx + glob.viewPortX
