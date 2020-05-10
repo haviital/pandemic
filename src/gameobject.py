@@ -50,8 +50,8 @@ class GameObject(sprite.Sprite):
         self.wx += self.frameOffsets[self.currentAnimFrameNum][0]
         self.wy += self.frameOffsets[self.currentAnimFrameNum][1]
                 
-    def update(self):
-
+    def Animate(self):
+        
         if(not self.active): return
 
         # Delay
@@ -78,7 +78,12 @@ class GameObject(sprite.Sprite):
 
                 self.ResetAnimation()
 
+    def update(self):
 
+        if(not self.active): return
+
+        # Animate
+        self.Animate()
 
         #print("juice: wx", self.wx,"wy",self.wy)
         # Advance position in the world

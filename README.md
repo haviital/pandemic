@@ -5,7 +5,7 @@ The Pandemic Python game for the Pokitto Punk Gamejam
 
 Tilemap processing with Gimp:
 - Change to 16 color mode.
-- Set the Pico-8 palette.
+- Set the Pico-8 palette ("Set colormap"). NOTE: The colors must be *exactly* in the same order as in the Pico-8 palette in th python program. 
 - Export as PNG
 - D&D png to the PyInSky
 

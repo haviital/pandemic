@@ -90,7 +90,7 @@ Indonesia	Jakarta	06.09S	106.49E
 Iran (Islamic Republic of)	Tehran	35.44N	51.30E
 Iraq	Baghdad	33.20N	44.30E
 Ireland	Dublin	53.21N	06.15W
-Israel	Jerusalem	31.71N	35.10W
+Israel	Jerusalem	31.71N	35.10E
 Italy	Rome	41.54N	12.29E
 Jamaica	Kingston	18.00N	76.50W
 Jordan	Amman	31.57N	35.52E

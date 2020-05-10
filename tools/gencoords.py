@@ -5,8 +5,8 @@ from PIL import ImageDraw
 from PIL import ImageFont
 import binascii
 
-X_OFFSET = -81.0;
-Y_OFFSET = 107.0;
+X_OFFSET = -82.0;
+Y_OFFSET = 111.0;
 W = 638;
 #H = 333;
 PI = math.pi
@@ -137,9 +137,10 @@ def projectAndDrawToPicture(cityList):
                 mapImage[x-1,y] = color;
                 mapImage[x,y+1] = color;
                 mapImage[x,y-1] = color;
-                font = ImageFont.truetype("arial.ttf", 10, encoding="unic")
-                draw = ImageDraw.Draw(img)
-                draw.text((x+3,y-5), city[0], color, font)
+                if True:
+                    font = ImageFont.truetype("arial.ttf", 10, encoding="unic")
+                    draw = ImageDraw.Draw(img)
+                    draw.text((x+3,y-5), city[0], color, font)
 
             
     # Save map
@@ -155,7 +156,7 @@ def millerProject(lat, lon):
     
     x = lon;
     #y = 1.25 * math.log( math.tan( (0.25 * PI) + (0.4 * lat )) );
-    y = 1.30 * math.log( math.tan( (0.25 * PI) + (0.4 * lat )) );
+    y = 1.35 * math.log( math.tan( (0.25 * PI) + (0.4 * lat )) );
     scale = W/PI/2
     x *= scale;
     y *= scale;
@@ -198,6 +199,8 @@ print( "#  ^-^-------------------------------------- The city record size in byt
 print( '#      ^-----------------^-------------------The city name (e.g. "Kabul")') 
 print( "#                          ^-----^-----------The x coordinate (e.g. 360)") 
 print( "#                                  ^-----^-- The y coordinate (e.g. 140)") 
+print( "")
+print( "numOfCities=",len(newCityList))
 print( "")
 print( "citydataBytes= b'\\")
 
